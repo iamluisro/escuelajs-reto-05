@@ -1,4 +1,5 @@
 # Escuelajs-reto-05
+
 Reto 5 Septiembre 28: Curso de Fundamentos de JavaScript
 
 # 100tifi.co
@@ -27,8 +28,7 @@ npm run start
 
 ### Documentación
 
-
-- Variable llamada $app donde haremos render de nuestra app.
+- Variable llamada \$app donde haremos render de nuestra app.
 - Elemento del DOM que sera Observado.
 - Constante 'API': Utilizamos la API de Rick and Morty.
 
@@ -42,56 +42,65 @@ Función llamada 'getData' que se encarga de hacer Fetch a una API y construye u
 
 ```javascript
 const getData = api => {
-  fetch(api)
-    .then(response => response.json())
-    .then(response => {
-      const characters = response.results;
-      let output = characters.map(character => {
-        return `
+	fetch(api)
+		.then(response => response.json())
+		.then(response => {
+			const characters = response.results;
+			let output = characters
+				.map(character => {
+					return `
       <article class="Card">
         <img src="${character.image}" />
         <h2>${character.name}<span>${character.species}</span></h2>
       </article>
-    `
-      }).join('');
-      let newItem = document.createElement('section');
-      newItem.classList.add('Items');
-      newItem.innerHTML = output;
-      $app.appendChild(newItem);
-    })
-    .catch(error => console.log(error));
-}
+    `;
+				})
+				.join('');
+			let newItem = document.createElement('section');
+			newItem.classList.add('Items');
+			newItem.innerHTML = output;
+			$app.appendChild(newItem);
+		})
+		.catch(error => console.log(error));
+};
 ```
 
 Función encargada de hacer Fetch de los personajes.
 
 ```javascript
 const loadData = () => {
-  getData(API);
-}
+	getData(API);
+};
 ```
 
 Intersection Observer
-```javascript
 
-const intersectionObserver = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) {
-    loadData();
-  }
-}, {
-  rootMargin: '0px 0px 100% 0px',
-});
+```javascript
+const intersectionObserver = new IntersectionObserver(
+	entries => {
+		if (entries[0].isIntersecting) {
+			loadData();
+		}
+	},
+	{
+		rootMargin: '0px 0px 100% 0px'
+	}
+);
 
 intersectionObserver.observe($observe);
 ```
-
 
 ## RETO
 
 ### Primer problema
 
 1. Guarda en localStorage la URL de la siguiente petición de personajes obtenida en la primera llamada a la API.
-2. Utiliza el nombre para la llave: 'next_fetch'.
+   localstorage método...
+   LR: utiliza debugger...
+   Nuevos personajes se tienen que cargar y por eso necesitamos saber cual es
+   la siguiente pagina del API .
+2. Utiliza el nombre para la llave: 'next_fetch'. Este es el nombre de la URL...
+   revisa con un IF
 3. Comprueba que se ha guardado el valor 'next_fetch' en localStorage.
 
 ### Segundo Problema
@@ -119,7 +128,9 @@ La API utilizada "RickAndMortyApi.com" tiene 25 paginas de 20 personajes cada un
 Debes de crear un "Fork" de este proyecto, revolver los problemas y crear un Pull Request hacia este repositorio.
 
 ### Contribuir
+
 Si alguien quiere agregar o mejorar algo, lo invito a colaborar directamente en este repositorio: [escuelajs-reto-05](https://github.com/platzi/escuelajs-reto-05/)
 
 ### Licencia
+
 escuelajs-reto-05 se lanza bajo la licencia [MIT](https://opensource.org/licenses/MIT).
